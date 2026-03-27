@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Tarot i Warsztaty | Atelier{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-6 pt-16 space-y-20">
+
+    <div class="text-center mb-16">
+        <h1 class="text-3xl md:text-4xl font-medium text-mira-text">Spotkania i Magia</h1>
+    </div>
+
+    {% for service in services %}
+    <div class="{% cycle 'bg-mira-light-blue' 'bg-mira-light-green' %} rounded-[2.5rem] md:rounded-[3.5rem] p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center gap-10 md:gap-16">
+
+        <div class="w-full md:w-1/2">
+            <div class="rounded-3xl overflow-hidden aspect-[4/5] shadow-sm bg-white">
+                {% if service.image %}
+                    <img src="{{ service.image.url }}" alt="{{ service.title }}" class="w-full h-full object-cover">
+                {% else %}
+                    <div class="w-full h-full flex items-center justify-center text-gray-400 bg-gray-50">Brak zdjęcia</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
+            <h2 class="text-3xl lg:text-4xl font-medium text-mira-text mb-6">{{ service.title }}</h2>
+
+            <p class="text-gray-600 leading-relaxed mb-6 font-medium">
+                {{ service.description|truncatewords:40 }}
+            </p>
+
+            <p class="text-lg font-semibold text-mira-text mb-8">
+                {{ service.duration_minutes }} min &nbsp; | &nbsp; {{ service.price }} zł
+            </p>
+
+            <a href="{% url 'services:service_detail' service.slug %}" class="bg-mira-pink hover:bg-mira-pink-hover text-white font-semibold py-3 px-8 rounded-full transition shadow-sm inline-block">
+                Sprawdź szczegóły
+            </a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="text-center text-gray-400 py-12">
+        <p>Brak dostępnych warsztatów. Wróć wkrótce.</p>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Sklep | Atelier{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-6 pt-16">
+    <div class="mb-12 text-center">
+        <h1 class="text-3xl md:text-4xl font-medium mb-8 text-mira-text">Wszystkie dzieła</h1>
+    </div>
+
+    <div class="flex justify-center space-x-6 mb-12 text-sm font-medium text-gray-500">
+        <a href="#" class="text-mira-text border-b-2 border-mira-text pb-1">Wszystko</a>
+        {% for category in categories %}
+            <a href="#" class="hover:text-mira-text transition">{{ category.name }}</a>
+        {% endfor %}
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {% for product in products %}
+        <div class="text-center group">
+            <a href="{% url 'shop:product_detail' product.slug %}" class="block mb-4 overflow-hidden rounded-3xl bg-gray-100 aspect-square shadow-sm relative">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                {% else %}
+                    <div class="w-full h-full flex items-center justify-center text-gray-300">Brak zdjęcia</div>
+                {% endif %}
+
+                {% if product.is_digital %}
+                    <span class="absolute top-4 right-4 bg-white/90 text-mira-text text-xs px-3 py-1 rounded-full font-semibold shadow-sm">PDF</span>
+                {% endif %}
+            </a>
+
+            <a href="{% url 'shop:product_detail' product.slug %}">
+                <h2 class="font-medium text-lg text-mira-text group-hover:text-mira-pink transition">{{ product.name }}</h2>
+            </a>
+            <p class="text-gray-500 mt-1">{{ product.price }} zł</p>
+        </div>
+        {% empty %}
+        <div class="col-span-full text-center text-gray-400 py-12">
+            <p>Brak produktów. Odwiedź nas wkrótce!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

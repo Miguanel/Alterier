@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Strona Główna | Twoje Atelier{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-6 pt-12 space-y-24 pb-20">
+
+    <section>
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-medium text-mira-text">Wybrane dla Ciebie</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {% for product in featured_products %}
+            <div class="text-center group">
+                <a href="{% url 'shop:product_detail' product.slug %}" class="block mb-4 overflow-hidden rounded-[2.5rem] bg-mira-light-blue/30 aspect-square shadow-sm relative">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    {% else %}
+                        <div class="w-full h-full flex items-center justify-center text-gray-300">Brak zdjęcia</div>
+                    {% endif %}
+                </a>
+                <a href="{% url 'shop:product_detail' product.slug %}">
+                    <h3 class="font-medium text-lg text-mira-text group-hover:text-mira-pink transition">{{ product.name }}</h3>
+                </a>
+                <p class="text-gray-500 mt-1">{{ product.price }} zł</p>
+            </div>
+            {% empty %}
+            <div class="col-span-full text-center text-gray-400">
+                <p>Wkrótce pojawią się tu nowe dzieła!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="bg-mira-light-green rounded-[3rem] p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center gap-10 md:gap-16 shadow-sm">
+        <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
+            <h2 class="text-3xl lg:text-4xl font-medium text-mira-text mb-6 leading-snug">
+                Odkryj więcej sztuki,<br>magii i wiedzy.
+            </h2>
+            <p class="text-mira-text/70 font-medium mb-8 text-lg">
+                Znajdziesz tu wszystko – od ilustracji, przez plany lekcji norweskiego, aż po sesje Tarota.
+            </p>
+            <a href="{% url 'shop:product_list' %}" class="bg-mira-pink hover:bg-mira-pink-hover text-white font-bold py-4 px-10 rounded-full transition shadow-md inline-block text-lg">
+                Przeglądaj sklep
+            </a>
+        </div>
+        <div class="w-full md:w-1/2">
+            <div class="rounded-[2.5rem] overflow-hidden aspect-video md:aspect-[4/3] shadow-sm bg-white">
+                <div class="w-full h-full bg-mira-mint/50 flex items-center justify-center text-mira-text/50 font-medium">
+                    [ Miejsce na klimatyczne zdjęcie sklepu ]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-mira-light-blue rounded-[3rem] p-8 md:p-12 lg:p-16 flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16 shadow-sm">
+        <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
+            <h2 class="text-3xl lg:text-4xl font-medium text-mira-text mb-6">Cześć!</h2>
+            <p class="text-mira-text/70 font-medium mb-8 leading-relaxed">
+                Tworzę sztukę, magiczne i lingwistyczne materiały (stationary materials) oraz pomagam w odkrywaniu siebie poprzez numerologię i Tarota. Chcę dzielić się z Wami moim światem.
+            </p>
+            <a href="#" class="bg-white text-mira-text hover:text-mira-pink font-bold py-4 px-10 rounded-full transition shadow-sm inline-block text-lg border-2 border-transparent hover:border-mira-pink">
+                Poznaj moją historię
+            </a>
+        </div>
+        <div class="w-full md:w-1/2">
+            <div class="rounded-[2.5rem] overflow-hidden aspect-square md:aspect-[4/5] shadow-sm bg-white">
+                <div class="w-full h-full bg-mira-pink/20 flex items-center justify-center text-mira-text/50 font-medium">
+                    [ Miejsce na portret autorki ]
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

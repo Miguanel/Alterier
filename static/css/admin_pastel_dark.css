@@ -1,0 +1,90 @@
+/* GŁÓWNE TŁO: Bardzo miękki, ciepły grafit zamiast ostrej czerni */
+body, .wrapper, .content-wrapper, .main-footer {
+    background-color: #2b2930 !important;
+    color: #e1e9ec !important; /* Jasny, pastelowy niebieski dla zwykłego tekstu */
+}
+
+/* PASEK BOCZNY I GÓRNY */
+.main-header, .main-sidebar, .elevation-4 {
+    background-color: #201e24 !important;
+    border-color: #383540 !important;
+}
+
+/* LOGO I TYTUŁY */
+.brand-link, .nav-header {
+    color: #ffb1b6 !important; /* Koralowy róż z frontendu */
+    font-weight: bold !important;
+}
+
+/* LINKI W MENU BOCZNYM (Miętowe) */
+.nav-sidebar .nav-link p, .nav-sidebar .nav-link i {
+    color: #c3e8d5 !important;
+    transition: 0.3s;
+}
+
+/* AKTYWNA ZAKŁADKA (Koralowa pigułka) */
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #ffb1b6 !important;
+    color: #2b2930 !important;
+    border-radius: 20px !important;
+}
+
+/* TABELE I KARTY */
+.card {
+    background-color: #312e38 !important; /* Nieco jaśniejsze tło dla kart */
+    border-radius: 15px !important;
+    border: none !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.table {
+    color: #e1e9ec !important;
+}
+
+/* PRZYCISKI (Miętowe i Różowe) */
+.btn-primary, .btn-info {
+    background-color: #c3e8d5 !important;
+    border-color: #c3e8d5 !important;
+    color: #2b2930 !important;
+    border-radius: 20px !important;
+    font-weight: bold;
+}
+
+.btn-primary:hover, .btn-info:hover {
+    background-color: #a1d0b6 !important;
+    color: #2b2930 !important;
+}
+
+.btn-success {
+    background-color: #ffb1b6 !important;
+    border-color: #ffb1b6 !important;
+    color: #2b2930 !important;
+    border-radius: 20px !important;
+}
+
+/* POLA FORMULARZY */
+.form-control {
+    background-color: #201e24 !important;
+    border: 1px solid #383540 !important;
+    color: #e1e9ec !important;
+    border-radius: 10px !important;
+}
+
+.form-control:focus {
+    border-color: #ffb1b6 !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 177, 182, 0.25) !important;
+}
+
+/* RESPNSYWNOSC PANELU: Dodaje poziomy pasek przewijania dla kart (tabel i formularzy) na malych ekranach */
+/* To pozwoli na przewijanie tylko zawartosci formularza, bez ucinania go i bez przesuwania menu bocznego */
+.content-wrapper .content .container-fluid .row .col-md-12 .card,
+.content-wrapper .content .container-fluid .card {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch; /* Plynniejsze przewijanie na iOS */
+}
+
+/* Opcjonalnie: Sprawia, że pasek z przyciskami (Zapisz, Usuń) też się zawija na małych ekranach, żeby nie uciekał */
+.submit-row, .object-tools {
+    flex-wrap: wrap !important;
+    gap: 5px !important;
+}
