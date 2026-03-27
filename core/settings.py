@@ -141,7 +141,8 @@ if os.environ.get('CLOUDINARY_CLOUD_NAME'):
             "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
         },
         "staticfiles": {
-            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+            # Zmiana tutaj! Z CompressedManifestStaticFilesStorage na CompressedStaticFilesStorage
+            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
         },
     }
 else:
