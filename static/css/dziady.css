@@ -1,0 +1,31 @@
+/* --- STYL 6: DZIADY (Mrok i blask świec) --- */
+:root {
+    --bg-mrok: #08070a;          /* Absolutny mrok */
+    --bg-chata: #121017;         /* Cmentarna mgła (bardzo ciemny fiolet) */
+    --bg-kociolek: #1c1826;      /* Fioletowe cienie */
+    --tekst-ksiega: #e6e2db;     /* Wosk ze świecy / lico upiora */
+    --tekst-zgaszony: #6f6b7d;   /* Dym */
+    --kolor-czary: #e67300;      /* Ogień z pochodni / świeca */
+    --kolor-czary-hover: #ff8c1a;/* Jasny ogień */
+    --kolor-trucizna: #240f0f;   /* Ziemia i popiół */
+}
+
+/* --- RESZTA REGUŁ --- */
+body { background-color: var(--bg-mrok) !important; color: var(--tekst-ksiega) !important; }
+h1, h2, h3, h4, .text-mira-text, .text-gray-900 { color: var(--tekst-ksiega) !important; }
+p, .text-gray-600, .text-gray-500 { color: var(--tekst-zgaszony) !important; }
+.bg-mira-mint, .bg-mira-pink, .bg-mira-light-green, .bg-mira-light-blue, .bg-white, footer, header {
+    background-color: var(--bg-chata) !important; border-color: var(--bg-kociolek) !important;
+}
+.bg-gray-100, .aspect-square, .rounded-3xl, .rounded-\[2\.5rem\] {
+    background-color: var(--bg-chata) !important; border: 1px solid var(--bg-kociolek) !important;
+}
+a:hover { color: var(--kolor-czary-hover) !important; }
+.bg-mira-pink, .btn-primary, button[type="submit"] {
+    background-color: var(--kolor-czary) !important; color: var(--bg-mrok) !important; font-weight: bold !important;
+}
+.bg-mira-pink:hover, .btn-primary:hover, button[type="submit"]:hover { background-color: var(--kolor-czary-hover) !important; }
+input, textarea {
+    background-color: var(--bg-mrok) !important; border: 1px solid var(--bg-kociolek) !important; color: var(--tekst-ksiega) !important;
+}
+.bg-\[\#a1d0b6\] { background-color: var(--kolor-trucizna) !important; }

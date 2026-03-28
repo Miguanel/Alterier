@@ -1,0 +1,31 @@
+/* --- STYL 4: LESZY (Gęsty bór, kości i czerwień) --- */
+:root {
+    --bg-mrok: #0a0e0b;          /* Prawie czarna zieleń */
+    --bg-chata: #131a14;         /* Zbutwiałe drewno / cień drzew */
+    --bg-kociolek: #1c261e;      /* Mroczny mech */
+    --tekst-ksiega: #d4d1c9;     /* Wyblakłe kości */
+    --tekst-zgaszony: #798075;   /* Suche liście */
+    --kolor-czary: #8b1818;      /* Krwista czerwień / jarzębina */
+    --kolor-czary-hover: #b32424;/* Jaśniejsza krew */
+    --kolor-trucizna: #1a1412;   /* Ciemne błoto */
+}
+
+/* --- RESZTA REGUŁ --- */
+body { background-color: var(--bg-mrok) !important; color: var(--tekst-ksiega) !important; }
+h1, h2, h3, h4, .text-mira-text, .text-gray-900 { color: var(--tekst-ksiega) !important; }
+p, .text-gray-600, .text-gray-500 { color: var(--tekst-zgaszony) !important; }
+.bg-mira-mint, .bg-mira-pink, .bg-mira-light-green, .bg-mira-light-blue, .bg-white, footer, header {
+    background-color: var(--bg-chata) !important; border-color: var(--bg-kociolek) !important;
+}
+.bg-gray-100, .aspect-square, .rounded-3xl, .rounded-\[2\.5rem\] {
+    background-color: var(--bg-chata) !important; border: 1px solid var(--bg-kociolek) !important;
+}
+a:hover { color: var(--kolor-czary-hover) !important; }
+.bg-mira-pink, .btn-primary, button[type="submit"] {
+    background-color: var(--kolor-czary) !important; color: var(--bg-mrok) !important; font-weight: bold !important;
+}
+.bg-mira-pink:hover, .btn-primary:hover, button[type="submit"]:hover { background-color: var(--kolor-czary-hover) !important; }
+input, textarea {
+    background-color: var(--bg-mrok) !important; border: 1px solid var(--bg-kociolek) !important; color: var(--tekst-ksiega) !important;
+}
+.bg-\[\#a1d0b6\] { background-color: var(--kolor-trucizna) !important; }
