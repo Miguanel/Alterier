@@ -1,0 +1,31 @@
+/* --- STYL 2: NOC KUPAŁY (Granat, Srebro, Magiczna Zieleń) --- */
+:root {
+    --bg-mrok: #0b0c10;          /* Najgłębsza noc */
+    --bg-chata: #1f2833;         /* Ciemny granat zgaszony */
+    --bg-kociolek: #2a3644;      /* Granatowe krawędzie */
+    --tekst-ksiega: #c5c6c7;     /* Księżycowe srebro */
+    --tekst-zgaszony: #88929c;   /* Ciemniejsze srebro */
+    --kolor-czary: #66fcf1;      /* Kwiat paproci (neonowy cyjan/zieleń) */
+    --kolor-czary-hover: #45a29e;/* Zgaszona magiczna zieleń */
+    --kolor-trucizna: #2c1e4a;   /* Nocny fiolet na paski ogłoszeń */
+}
+
+/* --- RESZTA REGUŁ (taka sama dla wszystkich stylów) --- */
+body { background-color: var(--bg-mrok) !important; color: var(--tekst-ksiega) !important; }
+h1, h2, h3, h4, .text-mira-text, .text-gray-900 { color: var(--tekst-ksiega) !important; }
+p, .text-gray-600, .text-gray-500 { color: var(--tekst-zgaszony) !important; }
+.bg-mira-mint, .bg-mira-pink, .bg-mira-light-green, .bg-mira-light-blue, .bg-white, footer, header {
+    background-color: var(--bg-chata) !important; border-color: var(--bg-kociolek) !important;
+}
+.bg-gray-100, .aspect-square, .rounded-3xl, .rounded-\[2\.5rem\] {
+    background-color: var(--bg-chata) !important; border: 1px solid var(--bg-kociolek) !important;
+}
+a:hover { color: var(--kolor-czary-hover) !important; }
+.bg-mira-pink, .btn-primary, button[type="submit"] {
+    background-color: var(--kolor-czary) !important; color: var(--bg-mrok) !important; font-weight: bold !important;
+}
+.bg-mira-pink:hover, .btn-primary:hover, button[type="submit"]:hover { background-color: var(--kolor-czary-hover) !important; }
+input, textarea {
+    background-color: var(--bg-mrok) !important; border: 1px solid var(--bg-kociolek) !important; color: var(--tekst-ksiega) !important;
+}
+.bg-\[\#a1d0b6\] { background-color: var(--kolor-trucizna) !important; }

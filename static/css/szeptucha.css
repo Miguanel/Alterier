@@ -1,0 +1,31 @@
+/* --- STYL 3: SZEPTUCHA (Mech, Kora drzew, Jarzębina, Miedź) --- */
+:root {
+    --bg-mrok: #1a1514;          /* Ciemna, wilgotna ziemia */
+    --bg-chata: #2b2321;         /* Stare drewno */
+    --bg-kociolek: #3d322f;      /* Kora */
+    --tekst-ksiega: #e6ccb8;     /* Lnianie płótno */
+    --tekst-zgaszony: #a89485;   /* Brudny len */
+    --kolor-czary: #d46a43;      /* Jarzębina / rdzawa miedź */
+    --kolor-czary-hover: #e8845f;/* Jaśniejsza miedź */
+    --kolor-trucizna: #3e4a31;   /* Suszone zioła / ciemny mech na pasek */
+}
+
+/* --- RESZTA REGUŁ (taka sama dla wszystkich stylów) --- */
+body { background-color: var(--bg-mrok) !important; color: var(--tekst-ksiega) !important; }
+h1, h2, h3, h4, .text-mira-text, .text-gray-900 { color: var(--tekst-ksiega) !important; }
+p, .text-gray-600, .text-gray-500 { color: var(--tekst-zgaszony) !important; }
+.bg-mira-mint, .bg-mira-pink, .bg-mira-light-green, .bg-mira-light-blue, .bg-white, footer, header {
+    background-color: var(--bg-chata) !important; border-color: var(--bg-kociolek) !important;
+}
+.bg-gray-100, .aspect-square, .rounded-3xl, .rounded-\[2\.5rem\] {
+    background-color: var(--bg-chata) !important; border: 1px solid var(--bg-kociolek) !important;
+}
+a:hover { color: var(--kolor-czary-hover) !important; }
+.bg-mira-pink, .btn-primary, button[type="submit"] {
+    background-color: var(--kolor-czary) !important; color: var(--bg-mrok) !important; font-weight: bold !important;
+}
+.bg-mira-pink:hover, .btn-primary:hover, button[type="submit"]:hover { background-color: var(--kolor-czary-hover) !important; }
+input, textarea {
+    background-color: var(--bg-mrok) !important; border: 1px solid var(--bg-kociolek) !important; color: var(--tekst-ksiega) !important;
+}
+.bg-\[\#a1d0b6\] { background-color: var(--kolor-trucizna) !important; }
