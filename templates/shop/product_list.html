@@ -15,29 +15,35 @@
         {% endfor %}
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-8 space-y-8 max-w-7xl mx-auto px-6 pt-16 pb-20">
+
         {% for product in products %}
-        <div class="text-center group">
-            <a href="{% url 'shop:product_detail' product.slug %}" class="block mb-4 overflow-hidden rounded-3xl bg-gray-100 aspect-square shadow-sm relative">
+        <div class="break-inside-avoid group relative flex flex-col items-center mb-8">
+
+            <a href="{% url 'shop:product_detail' product.slug %}" class="block w-full overflow-hidden rounded-t-[2rem] rounded-b-[1rem] bg-chata shadow-lg border border-kociolek transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-1">
                 {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-auto object-cover">
                 {% else %}
-                    <div class="w-full h-full flex items-center justify-center text-gray-300">Brak zdjęcia</div>
+                    <div class="w-full h-64 flex items-center justify-center text-gray-700 bg-chata">Brak zdjęcia</div>
                 {% endif %}
 
                 {% if product.is_digital %}
-                    <span class="absolute top-4 right-4 bg-white/90 text-mira-text text-xs px-3 py-1 rounded-full font-semibold shadow-sm">PDF</span>
+                    <span class="absolute top-4 right-4 bg-mrok/80 text-ksiega text-xs px-3 py-1 rounded-full font-semibold shadow-sm backdrop-blur-sm border border-kociolek">PDF</span>
                 {% endif %}
             </a>
 
-            <a href="{% url 'shop:product_detail' product.slug %}">
-                <h2 class="font-medium text-lg text-mira-text group-hover:text-mira-pink transition">{{ product.name }}</h2>
-            </a>
-            <p class="text-gray-500 mt-1">{{ product.price }} zł</p>
+            <div class="text-left w-full pt-6 pl-2 relative">
+                <div class="absolute left-[-10px] top-[30px] w-2 h-2 rounded-full bg-kolor-czary opacity-70"></div>
+
+                <a href="{% url 'shop:product_detail' product.slug %}">
+                    <h2 class="font-serif text-xl text-ksiega group-hover:text-kolor-czary-hover transition-colors duration-300 leading-snug">{{ product.name }}</h2>
+                </a>
+                <p class="text-kolor-czary font-bold mt-2 text-lg tracking-wide">{{ product.price }} zł</p>
+            </div>
         </div>
         {% empty %}
-        <div class="col-span-full text-center text-gray-400 py-12">
-            <p>Brak produktów. Odwiedź nas wkrótce!</p>
+        <div class="col-span-full text-center text-gray-500 py-12 font-light">
+            <p>Księga produktów jest obecnie pusta...</p>
         </div>
         {% endfor %}
     </div>

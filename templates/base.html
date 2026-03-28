@@ -10,16 +10,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     {% load static %}
     <link id="theme-stylesheet" rel="stylesheet" href="{% static 'css/baba_jaga.css' %}">
 
-    <script>
+   <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Lora', 'serif'],
+                        sans: ['Lora', 'serif'], // Font bazowy
+                        serif: ['Playfair Display', 'serif'], // Font dla nagłówków (.font-serif)
                     }
                 }
             }
@@ -59,19 +60,27 @@
         </div>
     </header>
 
-    <nav class="bg-mira-mint font-medium border-t border-gray-800">
+    <nav class="bg-chata/90 backdrop-blur-sm font-medium border-t border-kociolek relative z-10">
         <div class="max-w-7xl mx-auto px-6 overflow-x-auto">
-            <ul class="flex justify-center space-x-6 md:space-x-10 py-3 text-sm md:text-base whitespace-nowrap text-mira-text">
-                <li><a href="{% url 'shop:product_list' %}" class="hover:opacity-75 transition">Sklep i PDFy</a></li>
-                <li><a href="{% url 'services:service_list' %}" class="hover:opacity-75 transition">Tarot & Warsztaty</a></li>
+            <ul class="flex justify-center space-x-6 md:space-x-10 py-4 text-sm md:text-base whitespace-nowrap text-ksiega tracking-wide">
+                <li><a href="{% url 'shop:product_list' %}" class="relative group pb-1">
+                    Sklep i PDFy
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-kolor-czary scale-x-100 transition-transform duration-300"></span>
+                </a></li>
+                <li><a href="{% url 'services:service_list' %}" class="relative group pb-1 hover:text-kolor-czary-hover transition">
+                    Tarot & Warsztaty
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-kolor-czary scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                </a></li>
+
                 <li><a href="#" class="hover:opacity-75 transition">Naklejki</a></li>
                 <li><a href="#" class="hover:opacity-75 transition">O mnie</a></li>
                 <li><a href="#" class="hover:opacity-75 transition">Kontakt</a></li>
             </ul>
+
         </div>
     </nav>
 
-    <div class="bg-[#a1d0b6] text-white text-center py-2 text-sm">
+    <div class="bg-gradient-to-r from-bg-chata via-kolor-trucizna/50 to-bg-chata text-tekst-zgaszony text-center py-2.5 text-xs tracking-widest uppercase border-b border-kociolek">
         Witaj w mojej artystycznej przestrzeni! Sprawdź nowe warsztaty.
     </div>
 
