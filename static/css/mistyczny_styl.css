@@ -1,0 +1,73 @@
+/* --- MISTYCZNA PALETA BABA JAGI --- */
+:root {
+    /* Tła (Bardzo mroczne, grafitowo-leśne) */
+    --bg-mrok: #141417;          /* Główne tło strony */
+    --bg-chata: #1b1b1f;         /* Tła sekcji, kart produktów */
+    --bg-kociolek: #232329;       /* Uniesione elementy, bordery */
+
+    /* Teksty (Zgaszone, pergaminowe) */
+    --tekst-ksiega: #e1dcc9;     /* Główny tekst (stary papier) */
+    --tekst-zgaszony: #a19d90;   /* Mniej ważne opisy */
+
+    /* Akcenty (Magiczne, kontrastowe) */
+    --kolor-czary: #c19a6b;      /* Stare złoto / mosiądz (przyciski, linki) */
+    --kolor-czary-hover: #e0bc91; /* Jaśniejsze złoto po najechaniu */
+    --kolor-trucizna: #4a5d4a;   /* Zgaszona, leśna zieleń (paski, tła) */
+}
+
+/* --- NADPISANIE KLAS TAILWIND --- */
+
+/* Główne tło i tekst */
+body {
+    background-color: var(--bg-mrok) !important;
+    color: var(--tekst-ksiega) !important;
+}
+
+/* Teksty */
+h1, h2, h3, h4, .text-mira-text, .text-gray-900 {
+    color: var(--tekst-ksiega) !important;
+}
+
+p, .text-gray-600, .text-gray-500 {
+    color: var(--tekst-zgaszony) !important;
+}
+
+/* Elementy tła (Nawigacja, Stopka, Paski) */
+.bg-mira-mint, .bg-mira-pink, .bg-mira-light-green, .bg-mira-light-blue, .bg-white, footer, header {
+    background-color: var(--bg-chata) !important;
+    border-color: var(--bg-kociolek) !important;
+}
+
+/* Karty produktów i boki sekcji (np. na Home) */
+.bg-gray-100, .aspect-square, .rounded-3xl, .rounded-\[2\.5rem\] {
+    background-color: var(--bg-chata) !important;
+    border: 1px solid var(--bg-kociolek) !important;
+}
+
+/* Linki i akcenty */
+a:hover {
+    color: var(--kolor-czary-hover) !important;
+}
+
+/* PRZYCISKI (Złote pigułki) */
+.bg-mira-pink, .btn-primary, button[type="submit"] {
+    background-color: var(--kolor-czary) !important;
+    color: var(--bg-mrok) !important; /* Ciemny tekst na złotym tle */
+    font-weight: bold !important;
+}
+
+.bg-mira-pink:hover, .btn-primary:hover, button[type="submit"]:hover {
+    background-color: var(--kolor-czary-hover) !important;
+}
+
+/* Inputy w formularzach */
+input, textarea {
+    background-color: var(--bg-mrok) !important;
+    border: 1px solid var(--bg-kociolek) !important;
+    color: var(--tekst-ksiega) !important;
+}
+
+/* Pasek ogłoszeń (Zieleń leśna) */
+.bg-\[\#a1d0b6\] {
+    background-color: var(--kolor-trucizna) !important;
+}
