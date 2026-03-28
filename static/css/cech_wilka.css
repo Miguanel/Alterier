@@ -1,0 +1,31 @@
+/* --- STYL 5: CECH WILKA (Stal, skóra, srebro i bursztyn) --- */
+:root {
+    --bg-mrok: #0d0f12;          /* Nocne niebo / ciemna stal */
+    --bg-chata: #181b21;         /* Przetarta skóra rynsztunku */
+    --bg-kociolek: #252a33;      /* Jasna stal na krawędziach */
+    --tekst-ksiega: #cfd4d9;     /* Polerowane srebro */
+    --tekst-zgaszony: #7b838c;   /* Zmatowiały metal */
+    --kolor-czary: #d98a29;      /* Wiedźmiński bursztyn / Igni */
+    --kolor-czary-hover: #f2a641;/* Rozpalony płomień */
+    --kolor-trucizna: #151a17;   /* Toksyczny eliksir (ciemny) */
+}
+
+/* --- RESZTA REGUŁ --- */
+body { background-color: var(--bg-mrok) !important; color: var(--tekst-ksiega) !important; }
+h1, h2, h3, h4, .text-mira-text, .text-gray-900 { color: var(--tekst-ksiega) !important; }
+p, .text-gray-600, .text-gray-500 { color: var(--tekst-zgaszony) !important; }
+.bg-mira-mint, .bg-mira-pink, .bg-mira-light-green, .bg-mira-light-blue, .bg-white, footer, header {
+    background-color: var(--bg-chata) !important; border-color: var(--bg-kociolek) !important;
+}
+.bg-gray-100, .aspect-square, .rounded-3xl, .rounded-\[2\.5rem\] {
+    background-color: var(--bg-chata) !important; border: 1px solid var(--bg-kociolek) !important;
+}
+a:hover { color: var(--kolor-czary-hover) !important; }
+.bg-mira-pink, .btn-primary, button[type="submit"] {
+    background-color: var(--kolor-czary) !important; color: var(--bg-mrok) !important; font-weight: bold !important;
+}
+.bg-mira-pink:hover, .btn-primary:hover, button[type="submit"]:hover { background-color: var(--kolor-czary-hover) !important; }
+input, textarea {
+    background-color: var(--bg-mrok) !important; border: 1px solid var(--bg-kociolek) !important; color: var(--tekst-ksiega) !important;
+}
+.bg-\[\#a1d0b6\] { background-color: var(--kolor-trucizna) !important; }
