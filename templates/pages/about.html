@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}O mnie | Atelier{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-6 pt-16 pb-24">
+    
+    <div class="text-center mb-16 relative">
+        <div class="absolute left-1/2 -translate-x-1/2 -top-6 w-12 h-0.5 bg-kolor-czary opacity-50"></div>
+        <h1 class="text-4xl md:text-5xl font-serif text-ksiega tracking-wide">Moja Historia</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div class="relative group z-10">
+            <div class="absolute -inset-2 bg-gradient-to-tr from-kolor-czary/20 to-transparent blur-xl opacity-50 group-hover:opacity-100 transition duration-1000"></div>
+            <div class="rounded-tl-[4rem] rounded-br-[4rem] rounded-tr-xl rounded-bl-xl overflow-hidden shadow-2xl border border-kociolek bg-mrok aspect-[4/5] relative z-10">
+                <div class="w-full h-full flex items-center justify-center text-tekst-zgaszony font-serif italic text-lg">
+                    [ Twoje magiczne zdjęcie ]
+                </div>
+            </div>
+        </div>
+
+        <div class="prose prose-invert prose-p:text-tekst-zgaszony prose-p:leading-relaxed prose-p:text-lg">
+            <h2 class="text-3xl font-serif text-ksiega mb-6">Witaj w moim świecie</h2>
+            <p>
+                Jestem Angie. Tworzę sztukę, która ma w sobie odrobinę magii, mroku i głębokiego spokoju. Moje Atelier to miejsce, w którym ilustracja spotyka się z wiedzą i ezoteryką.
+            </p>
+            <p>
+                Zaczynałam od... <em>(tutaj wpiszesz swoją historię)</em>. Z czasem moja twórczość ewoluowała, a ja postanowiłam stworzyć przestrzeń, w której będę mogła dzielić się nie tylko obrazami, ale też wiedzą z norweskiego i sesjami Tarota.
+            </p>
+            <p>
+                Rozgość się. Jeśli coś przyciągnie Twój wzrok, wiedz, że zostało stworzone z ogromną intencją i pasją.
+            </p>
+            
+            <div class="mt-10 pt-8 border-t border-kociolek">
+                <p class="font-serif text-xl text-kolor-czary italic">"Sztuka to magia, którą możemy zobaczyć."</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

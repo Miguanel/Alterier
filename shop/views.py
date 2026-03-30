@@ -2,11 +2,24 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product, Category
 
 
-def product_list(request):
-    products = Product.objects.filter(available=True)
+def product_list(request, category_slug=None):
+    category = None
     categories = Category.objects.all()
-    context = {'products': products, 'categories': categories}
-    return render(request, 'shop/product_list.html', context)
+    # Pobieramy wszystkie dostępne produkty
+    products = Product.objects.filter(available=True)
+
+    # Jeśli w adresie URL przekazano "category_slug" (np. "naklejki")
+    if category_slug:
+        # Szukamy tej kategorii w bazie danych (jeśli nie ma, wywali błąd 404)
+        category = get_object_or_404(Category, slug=category_slug)
+        # Filtrujemy produkty, żeby pokazać tylko te z danej kategorii
+        products = products.filter(category=category)
+
+    return render(request, 'shop/product_list.html', {
+        'category': category,
+        'categories': categories,
+        'products': products
+    })
 
 
 # NOWA FUNKCJA: Detale produktu

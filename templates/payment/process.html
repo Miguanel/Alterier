@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Opłać zamówienie | Atelier{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-6 pt-24 pb-32 text-center">
+    <h1 class="text-4xl font-serif text-ksiega mb-6">Terminal Płatniczy</h1>
+    <p class="text-lg text-tekst-zgaszony mb-10">Zamówienie <strong class="text-ksiega">#{{ order.id }}</strong> na kwotę <strong class="text-kolor-czary">{{ order.get_total_cost }} zł</strong></p>
+    
+    <div class="bg-chata border border-kociolek p-10 rounded-[2rem] shadow-xl">
+        <p class="text-sm text-tekst-zgaszony mb-8 italic">*(Tutaj w przyszłości pojawi się okienko Stripe do wpisania karty / BLIKa. Na razie użyj przycisku poniżej, aby przetestować system)*</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="w-full bg-kolor-czary hover:bg-kolor-czary-hover text-bg-mrok py-4 rounded-full font-bold text-lg transition-all shadow-md">
+                💸 Symuluj udaną płatność
+            </button>
+        </form>
+        
+        <a href="{% url 'payment:canceled' %}" class="block mt-6 text-sm text-red-500/70 hover:text-red-500 transition">
+            Symuluj odrzucenie płatności
+        </a>
+    </div>
+</div>
+{% endblock %}

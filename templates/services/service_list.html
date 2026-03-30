@@ -3,44 +3,43 @@
 {% block title %}Tarot i Warsztaty | Atelier{% endblock %}
 
 {% block content %}
-<div class="max-w-6xl mx-auto px-6 pt-16 space-y-20">
+<div class="max-w-6xl mx-auto px-6 pt-16 space-y-24 pb-20">
 
-    <div class="text-center mb-16">
-        <h1 class="text-3xl md:text-4xl font-medium text-mira-text">Spotkania i Magia</h1>
+    <div class="text-center mb-16 relative">
+        <div class="absolute left-1/2 -translate-x-1/2 -top-6 w-12 h-0.5 bg-kolor-czary opacity-50"></div>
+        <h1 class="text-4xl md:text-5xl font-serif text-ksiega tracking-wide">Spotkania i Magia</h1>
     </div>
 
     {% for service in services %}
-    <div class="{% cycle 'bg-mira-light-blue' 'bg-mira-light-green' %} rounded-[2.5rem] md:rounded-[3.5rem] p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center gap-10 md:gap-16">
+    <div class="bg-chata border border-kociolek rounded-tl-[4rem] rounded-br-[4rem] rounded-tr-xl rounded-bl-xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10 md:gap-16 shadow-lg relative overflow-hidden group">
 
-        <div class="w-full md:w-1/2">
-            <div class="rounded-3xl overflow-hidden aspect-[4/5] shadow-sm bg-white">
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-kolor-czary/5 to-transparent pointer-events-none"></div>
+
+        <div class="w-full md:w-1/2 z-10">
+            <div class="rounded-tl-[3rem] rounded-br-[3rem] rounded-tr-lg rounded-bl-lg overflow-hidden aspect-[4/5] shadow-xl border border-kociolek bg-mrok relative">
                 {% if service.image %}
-                    <img src="{{ service.image.url }}" alt="{{ service.title }}" class="w-full h-full object-cover">
+                    <img src="{{ service.image.url }}" alt="{{ service.title }}" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105">
                 {% else %}
-                    <div class="w-full h-full flex items-center justify-center text-gray-400 bg-gray-50">Brak zdjęcia</div>
+                    <div class="w-full h-full flex items-center justify-center text-tekst-zgaszony font-light">Brak zdjęcia</div>
                 {% endif %}
             </div>
         </div>
 
-        <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
-            <h2 class="text-3xl lg:text-4xl font-medium text-mira-text mb-6">{{ service.title }}</h2>
+        <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left z-10">
+            <h2 class="text-3xl lg:text-4xl font-serif text-ksiega mb-6">{{ service.title }}</h2>
 
-            <p class="text-gray-600 leading-relaxed mb-6 font-medium">
+            <p class="text-tekst-zgaszony leading-relaxed mb-6 font-medium text-lg">
                 {{ service.description|truncatewords:40 }}
             </p>
 
-            <p class="text-lg font-semibold text-mira-text mb-8">
-                {{ service.duration_minutes }} min &nbsp; | &nbsp; {{ service.price }} zł
+            <p class="text-xl font-bold text-kolor-czary mb-8 tracking-wide">
+                {{ service.duration_minutes }} min <span class="text-kociolek mx-3">|</span> {{ service.price }} zł
             </p>
 
-            <a href="{% url 'services:service_detail' service.slug %}" class="bg-mira-pink hover:bg-mira-pink-hover text-white font-semibold py-3 px-8 rounded-full transition shadow-sm inline-block">
-                Sprawdź szczegóły
+            <a href="{% url 'services:service_detail' service.slug %}" class="bg-kolor-czary hover:bg-kolor-czary-hover text-bg-mrok font-bold py-3 px-8 rounded-full transition shadow-md inline-block">
+                Poznaj szczegóły
             </a>
         </div>
-    </div>
-    {% empty %}
-    <div class="text-center text-gray-400 py-12">
-        <p>Brak dostępnych warsztatów. Wróć wkrótce.</p>
     </div>
     {% endfor %}
 

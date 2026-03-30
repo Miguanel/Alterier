@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Płatność zakończona | Atelier{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-6 pt-24 pb-32 text-center">
+    <div class="w-24 h-24 bg-kolor-czary/20 rounded-full flex items-center justify-center mx-auto mb-8 border border-kolor-czary shadow-[0_0_30px_rgba(92,131,116,0.3)]">
+        <svg class="w-12 h-12 text-kolor-czary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+    </div>
+
+    <h1 class="text-4xl md:text-5xl font-serif text-ksiega mb-6">Płatność Zakończona!</h1>
+    <p class="text-xl text-tekst-zgaszony mb-4">Dziękujemy za zamówienie <strong class="text-ksiega">#{{ order.id }}</strong>.</p>
+    <p class="text-sm text-kolor-czary mb-16">Potwierdzenie wysłaliśmy na Twój e-mail: {{ order.email }}</p>
+
+    <div class="bg-chata border border-kociolek rounded-[2rem] p-8 md:p-10 shadow-xl mb-12 text-left relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-kolor-czary/5 to-transparent pointer-events-none"></div>
+
+        <h2 class="text-2xl font-serif text-ksiega mb-8 border-b border-kociolek pb-4 relative z-10">Twoje zdobycze:</h2>
+
+        <div class="space-y-6 relative z-10">
+            {% for item in order.items.all %}
+            <div class="flex flex-col sm:flex-row items-center justify-between bg-mrok p-4 rounded-2xl border border-kociolek">
+
+                <div class="flex items-center gap-4 w-full sm:w-auto mb-4 sm:mb-0">
+                    <div class="w-16 h-16 rounded-xl overflow-hidden bg-chata">
+                        {% if item.product.image %}
+                            <img src="{{ item.product.image.url }}" class="w-full h-full object-cover">
+                        {% endif %}
+                    </div>
+                    <div>
+                        <p class="font-serif text-ksiega text-lg">{{ item.product.name }}</p>
+                        <p class="text-sm text-tekst-zgaszony">Ilość: {{ item.quantity }}</p>
+                    </div>
+                </div>
+
+                <div class="w-full sm:w-auto text-right">
+                    {% if item.product.is_digital %}
+                        <a href="{% if item.product.file %}{{ item.product.file.url }}{% else %}#{% endif %}" target="_blank" class="inline-block bg-kolor-czary hover:bg-kolor-czary-hover text-bg-mrok px-6 py-2 rounded-full font-bold text-sm transition-all shadow-md">
+                            Pobierz plik PDF
+                        </a>
+                    {% else %}
+                        <span class="text-sm text-tekst-zgaszony uppercase tracking-widest">Wysyłka fizyczna</span>
+                    {% endif %}
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <a href="{% url 'shop:product_list' %}" class="inline-block bg-transparent border-2 border-kociolek text-ksiega hover:border-kolor-czary hover:text-kolor-czary px-10 py-3 rounded-full font-bold transition">
+        Wróć do księgi produktów
+    </a>
+</div>
+{% endblock %}

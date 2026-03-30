@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-2j#o^hg5if5l9)+xmd&w*fp#8t+(-d6jde+a70!eg^zk5so+2e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = not os.environ.get('DATABASE_URL')
 
 ALLOWED_HOSTS = ['*']
 
@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'pages',
     'cloudinary_storage',
     'cloudinary',
+    'cart',
+    'orders',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -66,9 +69,12 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # DODAJ TĘ LINIJKĘ:
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -213,3 +219,17 @@ JAZZMIN_UI_TWEAKS = {
         "secondary": "btn-outline-secondary",
     },
 }
+
+# Klucz sesji dla naszego koszyka
+CART_SESSION_ID = 'koszyk_atelier'
+
+# --- KONFIGURACJA STRIPE ---
+# (Później podmienimy je na Twoje prawdziwe klucze testowe)
+STRIPE_PUBLISHABLE_KEY = 'pk_test_twoj_klucz_publiczny'
+STRIPE_SECRET_KEY = 'sk_test_twoj_klucz_prywatny'
+STRIPE_API_VERSION = '2023-10-16'
+
+# --- KONFIGURACJA E-MAIL (TESTOWA) ---
+# Wszystkie e-maile będą wyświetlać się w konsoli PyCharma, zamiast lecieć w świat
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'Atelier Magii <kontakt@twojeatelier.pl>'

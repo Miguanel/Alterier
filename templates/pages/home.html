@@ -3,80 +3,84 @@
 {% block title %}Strona Główna | Twoje Atelier{% endblock %}
 
 {% block content %}
-<div class="max-w-7xl mx-auto px-6 pt-12 space-y-24 pb-20">
+<div class="max-w-7xl mx-auto px-6 pt-16 space-y-32 pb-24">
 
     <section>
-        <div class="text-center mb-10">
-            <h2 class="text-3xl md:text-4xl font-medium text-mira-text">Wybrane dla Ciebie</h2>
+        <div class="text-center mb-16 relative">
+            <div class="absolute left-1/2 -translate-x-1/2 -top-6 w-12 h-0.5 bg-kolor-czary opacity-50"></div>
+            <h2 class="text-4xl md:text-5xl font-serif text-ksiega tracking-wide">Wybrane dla Ciebie</h2>
         </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <div class="columns-1 sm:columns-2 lg:columns-4 gap-8 space-y-8">
             {% for product in featured_products %}
-            <div class="text-center group">
-                <a href="{% url 'shop:product_detail' product.slug %}" class="block mb-4 overflow-hidden rounded-[2.5rem] bg-mira-light-blue/30 aspect-square shadow-sm relative">
+            <div class="break-inside-avoid group relative flex flex-col items-center mb-8">
+                <a href="{% url 'shop:product_detail' product.slug %}" class="block w-full overflow-hidden rounded-t-[2rem] rounded-b-[1rem] bg-chata shadow-lg border border-kociolek transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-1">
                     {% if product.image %}
-                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500">
                     {% else %}
-                        <div class="w-full h-full flex items-center justify-center text-gray-300">Brak zdjęcia</div>
+                        <div class="w-full h-64 flex items-center justify-center text-tekst-zgaszony bg-chata">Brak zdjęcia</div>
                     {% endif %}
                 </a>
-                <a href="{% url 'shop:product_detail' product.slug %}">
-                    <h3 class="font-medium text-lg text-mira-text group-hover:text-mira-pink transition">{{ product.name }}</h3>
-                </a>
-                <p class="text-gray-500 mt-1">{{ product.price }} zł</p>
-            </div>
-            {% empty %}
-            <div class="col-span-full text-center text-gray-400">
-                <p>Wkrótce pojawią się tu nowe dzieła!</p>
+                <div class="text-left w-full pt-5 pl-2 relative">
+                    <div class="absolute left-[-8px] top-[26px] w-1.5 h-1.5 rounded-full bg-kolor-czary opacity-70"></div>
+                    <a href="{% url 'shop:product_detail' product.slug %}">
+                        <h3 class="font-serif text-lg text-ksiega group-hover:text-kolor-czary-hover transition-colors duration-300 leading-snug">{{ product.name }}</h3>
+                    </a>
+                    <p class="text-kolor-czary font-bold mt-1 tracking-wide">{{ product.price }} zł</p>
+                </div>
             </div>
             {% endfor %}
         </div>
     </section>
 
-    <section class="bg-mira-light-green rounded-[3rem] p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center gap-10 md:gap-16 shadow-sm">
-        <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
-            <h2 class="text-3xl lg:text-4xl font-medium text-mira-text mb-6 leading-snug">
+    <section class="bg-chata rounded-tl-[4rem] rounded-br-[4rem] rounded-tr-xl rounded-bl-xl p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center gap-10 md:gap-16 shadow-xl border border-kociolek relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-kolor-czary/5 to-transparent pointer-events-none"></div>
+
+        <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left z-10">
+            <h2 class="text-3xl lg:text-4xl font-serif text-ksiega mb-6 leading-snug">
                 {{ content.collections_title|default:"Odkryj więcej sztuki, magii i wiedzy." }}
             </h2>
-            <p class="text-mira-text/70 font-medium mb-8 text-lg">
+            <p class="text-tekst-zgaszony font-medium mb-10 text-lg leading-relaxed">
                 {{ content.collections_text|default:"Znajdziesz tu wszystko – od ilustracji, przez plany lekcji norweskiego, aż po sesje Tarota."|linebreaksbr }}
             </p>
-            <a href="{% url 'shop:product_list' %}" class="bg-mira-pink hover:bg-mira-pink-hover text-white font-bold py-4 px-10 rounded-full transition shadow-md inline-block text-lg">
+            <a href="{% url 'shop:product_list' %}" class="bg-kolor-czary hover:bg-kolor-czary-hover text-bg-mrok font-bold py-4 px-10 rounded-full transition shadow-md inline-block text-lg tracking-wide">
                 {{ content.collections_btn_text|default:"Przeglądaj sklep" }}
             </a>
         </div>
-        <div class="w-full md:w-1/2">
-            <div class="rounded-[2.5rem] overflow-hidden aspect-video md:aspect-[4/3] shadow-sm bg-white">
+        <div class="w-full md:w-1/2 z-10">
+            <div class="rounded-tl-[3rem] rounded-br-[3rem] rounded-tr-lg rounded-bl-lg overflow-hidden shadow-lg border border-kociolek aspect-square md:aspect-[4/3]">
                 {% if content and content.collections_image %}
-                    <img src="{{ content.collections_image.url }}" alt="Kolekcje" class="w-full h-full object-cover">
+                    <img src="{{ content.collections_image.url }}" alt="Kolekcje" class="w-full h-full object-cover opacity-85 hover:opacity-100 transition-opacity duration-700">
                 {% else %}
-                    <div class="w-full h-full bg-mira-mint/50 flex items-center justify-center text-mira-text/50 font-medium">
-                        [ Zdjecie ze sklepu - Dodaj w panelu Admina ]
+                    <div class="w-full h-full bg-mrok flex items-center justify-center text-tekst-zgaszony font-medium">
+                        [ Zdjecie ze sklepu - Dodaj w Adminie ]
                     </div>
                 {% endif %}
             </div>
         </div>
     </section>
 
-    <section class="bg-mira-light-blue rounded-[3rem] p-8 md:p-12 lg:p-16 flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16 shadow-sm">
+    <section class="flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16 mt-12 relative">
         <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
-            <h2 class="text-3xl lg:text-4xl font-medium text-mira-text mb-6">
+            <h2 class="text-3xl lg:text-4xl font-serif text-ksiega mb-6">
                 {{ content.about_title|default:"Cześć!" }}
             </h2>
-            <p class="text-mira-text/70 font-medium mb-8 leading-relaxed">
+            <p class="text-tekst-zgaszony font-medium mb-10 leading-relaxed text-lg">
                 {{ content.about_text|default:"Tworzę sztukę..."|linebreaksbr }}
             </p>
-            <a href="#" class="bg-white text-mira-text hover:text-mira-pink font-bold py-4 px-10 rounded-full transition shadow-sm inline-block text-lg border-2 border-transparent hover:border-mira-pink">
+            <a href="#" class="bg-transparent text-ksiega hover:text-kolor-czary font-bold py-3 px-8 rounded-full transition shadow-sm inline-block text-lg border-2 border-kociolek hover:border-kolor-czary">
                 {{ content.about_btn_text|default:"Poznaj moją historię" }}
             </a>
         </div>
-        <div class="w-full md:w-1/2">
-            <div class="rounded-[2.5rem] overflow-hidden aspect-square md:aspect-[4/5] shadow-sm bg-white">
+        <div class="w-full md:w-1/2 relative">
+            <div class="absolute -inset-4 border border-kolor-czary/20 rounded-tr-[4rem] rounded-bl-[4rem] rounded-tl-xl rounded-br-xl transform -rotate-2"></div>
+
+            <div class="rounded-tr-[3rem] rounded-bl-[3rem] rounded-tl-lg rounded-br-lg overflow-hidden aspect-[4/5] shadow-xl border border-kociolek bg-chata relative z-10">
                 {% if content and content.about_image %}
-                    <img src="{{ content.about_image.url }}" alt="Portret autorki" class="w-full h-full object-cover">
+                    <img src="{{ content.about_image.url }}" alt="Portret autorki" class="w-full h-full object-cover grayscale-[20%] contrast-125 hover:grayscale-0 transition-all duration-700">
                 {% else %}
-                    <div class="w-full h-full bg-mira-pink/20 flex items-center justify-center text-mira-text/50 font-medium">
-                        [ Twój Portret - Dodaj w panelu Admina ]
+                    <div class="w-full h-full bg-mrok flex items-center justify-center text-tekst-zgaszony font-medium">
+                        [ Twój Portret - Dodaj w Adminie ]
                     </div>
                 {% endif %}
             </div>

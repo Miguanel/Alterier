@@ -1,50 +1,54 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Sklep | Atelier{% endblock %}
+{% block title %}{% if category %}{{ category.name }}{% else %}Sklep{% endif %} | Atelier{% endblock %}
 
 {% block content %}
-<div class="max-w-7xl mx-auto px-6 pt-16">
-    <div class="mb-12 text-center">
-        <h1 class="text-3xl md:text-4xl font-medium mb-8 text-mira-text">Wszystkie dzieła</h1>
-    </div>
+<div class="max-w-7xl mx-auto px-6 pt-10 pb-24">
 
-    <div class="flex justify-center space-x-6 mb-12 text-sm font-medium text-gray-500">
-        <a href="#" class="text-mira-text border-b-2 border-mira-text pb-1">Wszystko</a>
-        {% for category in categories %}
-            <a href="#" class="hover:text-mira-text transition">{{ category.name }}</a>
+    <div class="flex flex-wrap justify-center gap-8 mb-20 relative">
+        <div class="absolute -top-10 left-1/2 -translate-x-1/2 opacity-10 pointer-events-none">
+            <svg class="w-64 h-64" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 20L180 150H20L100 20Z" stroke="#5c8374" stroke-width="0.5"/>
+                <circle cx="100" cy="100" r="70" stroke="#5c8374" stroke-width="0.5" stroke-dasharray="4 4"/>
+            </svg>
+        </div>
+
+        <a href="{% url 'shop:product_list' %}"
+           class="relative group text-lg tracking-widest uppercase transition-all duration-500
+                  {% if not category %}active-witch-link{% else %}text-tekst-zgaszony hover:text-ksiega{% endif %}">
+            Wszystko
+            <span class="absolute -bottom-2 left-0 w-full h-px bg-kolor-czary {% if not category %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %} transition-transform"></span>
+        </a>
+
+        {% for c in categories %}
+            <a href="{{ c.get_absolute_url }}"
+               class="relative group text-lg tracking-widest uppercase transition-all duration-500
+                      {% if category.slug == c.slug %}active-witch-link{% else %}text-tekst-zgaszony hover:text-ksiega{% endif %}">
+                {{ c.name }}
+                <span class="absolute -bottom-2 left-0 w-full h-px bg-kolor-czary {% if category.slug == c.slug %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %} transition-transform"></span>
+            </a>
         {% endfor %}
     </div>
 
-    <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-8 space-y-8 max-w-7xl mx-auto px-6 pt-16 pb-20">
-
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         {% for product in products %}
-        <div class="break-inside-avoid group relative flex flex-col items-center mb-8">
-
-            <a href="{% url 'shop:product_detail' product.slug %}" class="block w-full overflow-hidden rounded-t-[2rem] rounded-b-[1rem] bg-chata shadow-lg border border-kociolek transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-1">
-                {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-auto object-cover">
-                {% else %}
-                    <div class="w-full h-64 flex items-center justify-center text-gray-700 bg-chata">Brak zdjęcia</div>
-                {% endif %}
-
-                {% if product.is_digital %}
-                    <span class="absolute top-4 right-4 bg-mrok/80 text-ksiega text-xs px-3 py-1 rounded-full font-semibold shadow-sm backdrop-blur-sm border border-kociolek">PDF</span>
-                {% endif %}
-            </a>
-
-            <div class="text-left w-full pt-6 pl-2 relative">
-                <div class="absolute left-[-10px] top-[30px] w-2 h-2 rounded-full bg-kolor-czary opacity-70"></div>
-
-                <a href="{% url 'shop:product_detail' product.slug %}">
-                    <h2 class="font-serif text-xl text-ksiega group-hover:text-kolor-czary-hover transition-colors duration-300 leading-snug">{{ product.name }}</h2>
+            <div class="group flex flex-col items-center">
+                <a href="{{ product.get_absolute_url }}" class="w-full aspect-[3/4] overflow-hidden rounded-2xl border border-kociolek bg-chata shadow-2xl relative">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000">
+                    {% endif %}
                 </a>
-                <p class="text-kolor-czary font-bold mt-2 text-lg tracking-wide">{{ product.price }} zł</p>
+                <div class="mt-6 text-center">
+                    <h3 class="font-serif text-xl text-ksiega italic">{{ product.name }}</h3>
+                    <p class="text-kolor-czary mt-2 tracking-tighter">{{ product.price }} ZŁ</p>
+                </div>
             </div>
-        </div>
         {% empty %}
-        <div class="col-span-full text-center text-gray-500 py-12 font-light">
-            <p>Księga produktów jest obecnie pusta...</p>
-        </div>
+            <div class="col-span-full py-20 text-center">
+                <p class="font-serif text-2xl text-tekst-zgaszony italic">Ta sekcja księgi pozostaje jeszcze nieodkryta...</p>
+                <a href="/admin/shop/product/add/" class="inline-block mt-8 text-kolor-czary border-b border-kolor-czary pb-1 hover:text-ksiega transition">Dodaj pierwszy artefakt</a>
+            </div>
         {% endfor %}
     </div>
 </div>

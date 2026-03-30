@@ -1,0 +1,74 @@
+/* --- GŁÓWNY STYL ATELIER (Głęboki las i szałwia) --- */
+:root {
+    --bg-mrok: #091214;
+    --bg-chata: #152A2D;
+    --bg-kociolek: #183D3D;
+    --tekst-ksiega: #E2E2E2;
+    --tekst-zgaszony: #93B1A6;
+    --kolor-czary: #5C8374;
+    --kolor-czary-hover: #93B1A6;
+    --kolor-trucizna: #183D3D;
+}
+
+/* --- TŁO GŁÓWNE Z TEKSTURĄ --- */
+body {
+    background-color: var(--bg-mrok) !important;
+    color: var(--tekst-ksiega) !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E") !important;
+}
+
+/* --- KARTY I SEKCJE Z TEKSTURĄ --- */
+.bg-chata, .bg-mira-mint, .bg-mira-pink, footer, header, .rounded-3xl, .rounded-\[2\.5rem\], .rounded-t-\[2rem\] {
+    background-color: var(--bg-chata) !important;
+    border-color: var(--bg-kociolek) !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='60' height='60' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E") !important;
+}
+
+/* --- TYPOGRAFIA --- */
+h1, h2, h3, h4, .text-mira-text, .text-gray-900 {
+    color: var(--tekst-ksiega) !important;
+}
+
+p, .text-gray-600, .text-gray-500 {
+    color: var(--tekst-zgaszony) !important;
+}
+
+a:hover {
+    color: var(--kolor-czary-hover) !important;
+}
+
+/* --- PRZYCISKI --- */
+.bg-mira-pink, .btn-primary, button[type="submit"] {
+    background-color: var(--kolor-czary) !important;
+    color: var(--bg-mrok) !important; /* Ciemny napis na szałwiowym tle */
+    font-weight: bold !important;
+    transition: all 0.3s ease !important;
+}
+
+.bg-mira-pink:hover, .btn-primary:hover, button[type="submit"]:hover {
+    background-color: var(--kolor-czary-hover) !important;
+}
+
+/* --- FORMULARZE I ELEMENTY --- */
+input, textarea {
+    background-color: var(--bg-mrok) !important;
+    border: 1px solid var(--bg-kociolek) !important;
+    color: var(--tekst-ksiega) !important;
+}
+
+.bg-\[\#a1d0b6\] {
+    background-color: var(--kolor-trucizna) !important;
+}
+
+@keyframes witch-glow {
+    0% { text-shadow: 0 0 5px rgba(92, 131, 116, 0.2); }
+    50% { text-shadow: 0 0 15px rgba(92, 131, 116, 0.6), 0 0 20px rgba(92, 131, 116, 0.4); }
+    100% { text-shadow: 0 0 5px rgba(92, 131, 116, 0.2); }
+}
+
+.active-witch-link {
+    color: #5c8374 !important;
+    animation: witch-glow 3s infinite ease-in-out;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}

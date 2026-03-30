@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 
 class Category(models.Model):
     name = models.CharField(max_length=200, verbose_name="Nazwa kategorii")
@@ -13,31 +13,37 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('shop:product_list_by_category', args=[self.slug])
+
 
 class Product(models.Model):
     # Relacja do kategorii
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE, verbose_name="Kategoria")
 
+    # Podstawowe informacje
     name = models.CharField(max_length=200, verbose_name="Nazwa produktu")
     slug = models.SlugField(max_length=200, unique=True, verbose_name="URL (Slug)")
     description = models.TextField(verbose_name="Opis")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Cena")
-
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True, verbose_name="Zdjęcie produktu")
 
-    # Flagi dla produktów cyfrowych
+    # Flagi i pliki dla produktów cyfrowych
     is_digital = models.BooleanField(default=False, verbose_name="Produkt cyfrowy (nie wymaga wysyłki)")
-    digital_file = models.FileField(upload_to='digital_products/', blank=True, null=True,
-                                    verbose_name="Plik do pobrania (np. PDF)")
+    file = models.FileField(upload_to='products/files/', blank=True, null=True, verbose_name="Plik cyfrowy (np. PDF)")
 
+    # Status i daty
     available = models.BooleanField(default=True, verbose_name="Dostępny w sprzedaży")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Data utworzenia")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Ostatnia aktualizacja")
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['name']
         verbose_name = "Produkt"
         verbose_name_plural = "Produkty"
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('shop:product_detail', args=[self.slug])
