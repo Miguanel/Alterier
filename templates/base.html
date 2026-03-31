@@ -86,10 +86,13 @@
                         <svg class="w-4 h-4 ml-1 opacity-70 transform transition-transform duration-300 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <ul class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full mt-3 w-64 bg-deep-teal border border-herbal-gold/40 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] invisible opacity-0 translate-y-2 transition-all duration-300 z-50 overflow-hidden">
+
                         <li><a href="{% url 'services:service_list' %}" class="block px-6 py-4 text-sm font-bold border-b border-herbal-gold/20 hover:bg-herbal-gold/30 hover:text-candle-cream transition text-center">Wszystkie spotkania</a></li>
 
-                        <li><a href="{% url 'services:service_detail' 'indywidualny-odczyt' %}" class="block px-6 py-3.5 text-sm hover:bg-herbal-gold/30 hover:text-candle-cream transition text-center">Indywidualny odczyt</a></li>
-                        <li><a href="{% url 'services:service_detail' 'warsztaty-grupowe' %}" class="block px-6 py-3.5 text-sm hover:bg-herbal-gold/30 hover:text-candle-cream transition text-center">Warsztaty grupowe</a></li>
+                        {% for type in all_service_types %}
+                            <li><a href="{% url 'services:service_list_by_type' type.slug %}" class="block px-6 py-3.5 text-sm hover:bg-herbal-gold/30 hover:text-candle-cream transition text-center">{{ type.name }}</a></li>
+                        {% endfor %}
+
                     </ul>
                 </li>
 

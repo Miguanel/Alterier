@@ -1,12 +1,31 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Service, BookingRequest
+from .models import Service, BookingRequest, TarotSection, ServiceType
 from django.contrib import messages
+from django.utils import timezone
 
 
-def service_list(request):
-    services = Service.objects.filter(is_active=True)
-    return render(request, 'services/service_list.html', {'services': services})
+def service_list(request, type_slug=None):
+    now = timezone.now()
 
+    # Pobieramy wszystkie usługi
+    upcoming_services = Service.objects.filter(event_date__gte=now) | Service.objects.filter(event_date__isnull=True)
+    past_services = Service.objects.filter(event_date__lt=now).order_by('-event_date')
+
+    # Jeśli kliknięto w konkretną kategorię w menu, filtrujemy wyniki!
+    service_type = None
+    if type_slug:
+        service_type = get_object_or_404(ServiceType, slug=type_slug)
+        upcoming_services = upcoming_services.filter(service_type=service_type)
+        past_services = past_services.filter(service_type=service_type)
+
+    tarot_sections = TarotSection.objects.all()
+
+    return render(request, 'services/service_list.html', {
+        'service_type': service_type,
+        'upcoming_services': upcoming_services,
+        'past_services': past_services,
+        'tarot_sections': tarot_sections,
+    })
 
 def service_detail(request, slug):
     service = get_object_or_404(Service, slug=slug, is_active=True)

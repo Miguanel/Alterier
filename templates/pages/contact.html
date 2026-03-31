@@ -5,12 +5,13 @@
 <div class="max-w-4xl mx-auto px-6 pt-16 pb-24">
     <div class="text-center mb-16 relative">
         <h1 class="text-4xl md:text-5xl font-serif text-herbal-gold tracking-wide drop-shadow-md">Wyślij Kruka</h1>
-        <p class="text-candle-cream mt-6 text-lg">Masz pytanie o zamówienie, współpracę, a może chcesz zamówić coś spersonalizowanego?</p>
+        <p class="text-candle-cream mt-6 text-lg">Masz pytanie o zamówienie, współpracę, a może chcesz zapisać się na sesję?</p>
     </div>
 
     <div class="bg-gradient-to-br from-celestial-teal/50 to-mystic-ember/30 p-8 md:p-12 rounded-[3rem] border border-herbal-gold/40 shadow-2xl relative overflow-hidden backdrop-blur-md">
         <form action="#" method="POST" class="space-y-6 relative z-10">
             {% csrf_token %}
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-sm font-bold text-candle-cream mb-2 ml-4">Twoje Imię</label>
@@ -21,12 +22,19 @@
                     <input type="email" required class="w-full bg-deep-teal border border-herbal-gold/50 rounded-full py-4 px-6 text-candle-cream focus:outline-none focus:border-herbal-gold transition shadow-inner placeholder-candle-cream/30">
                 </div>
             </div>
+
+            <div>
+                <label class="block text-sm font-bold text-candle-cream mb-2 ml-4">Temat / Wybrana usługa</label>
+                <input type="text" name="subject" value="{{ request.GET.subject }}" required class="w-full bg-deep-teal border border-herbal-gold/50 rounded-full py-4 px-6 text-candle-cream focus:outline-none focus:border-herbal-gold transition shadow-inner placeholder-candle-cream/30">
+            </div>
+
             <div>
                 <label class="block text-sm font-bold text-candle-cream mb-2 ml-4">Wiadomość</label>
-                <textarea rows="5" required class="w-full bg-deep-teal border border-herbal-gold/50 rounded-[2rem] py-4 px-6 text-candle-cream focus:outline-none focus:border-herbal-gold transition shadow-inner resize-none placeholder-candle-cream/30"></textarea>
+                <textarea rows="5" required class="w-full bg-deep-teal border border-herbal-gold/50 rounded-[2rem] py-4 px-6 text-candle-cream focus:outline-none focus:border-herbal-gold transition shadow-inner resize-none placeholder-candle-cream/30">{% if request.GET.subject %}Chciałabym zamówić wizytę w ramach tej usługi. Proszę o informacje o wolnych terminach.{% endif %}</textarea>
             </div>
+
             <div class="text-center pt-4">
-                <button type="button" class="bg-herbal-gold hover:bg-candle-cream text-deep-teal px-12 py-4 rounded-full font-bold text-lg transition-all shadow-[0_0_15px_rgba(210,178,133,0.4)] uppercase tracking-wider">
+                <button type="submit" class="bg-herbal-gold hover:bg-candle-cream text-deep-teal px-12 py-4 rounded-full font-bold text-lg transition-all shadow-[0_0_15px_rgba(210,178,133,0.4)] uppercase tracking-wider">
                     Wyślij wiadomość
                 </button>
             </div>

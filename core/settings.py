@@ -75,6 +75,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'cart.context_processors.cart',
                 'shop.context_processors.menu_categories',
+                'services.context_processors.menu_service_types',
             ],
         },
     },
