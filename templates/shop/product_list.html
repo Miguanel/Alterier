@@ -4,52 +4,67 @@
 {% block title %}{% if category %}{{ category.name }}{% else %}Sklep{% endif %} | Atelier{% endblock %}
 
 {% block content %}
-<div class="max-w-7xl mx-auto px-6 pt-10 pb-24">
+<div class="bg-deep-teal min-h-screen text-candle-cream font-sans">
 
-    <div class="flex flex-wrap justify-center gap-8 mb-20 relative">
-        <div class="absolute -top-10 left-1/2 -translate-x-1/2 opacity-10 pointer-events-none">
-            <svg class="w-64 h-64" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M100 20L180 150H20L100 20Z" stroke="#5c8374" stroke-width="0.5"/>
-                <circle cx="100" cy="100" r="70" stroke="#5c8374" stroke-width="0.5" stroke-dasharray="4 4"/>
-            </svg>
-        </div>
-
-        <a href="{% url 'shop:product_list' %}"
-           class="relative group text-lg tracking-widest uppercase transition-all duration-500
-                  {% if not category %}active-witch-link{% else %}text-tekst-zgaszony hover:text-ksiega{% endif %}">
-            Wszystko
-            <span class="absolute -bottom-2 left-0 w-full h-px bg-kolor-czary {% if not category %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %} transition-transform"></span>
-        </a>
-
-        {% for c in categories %}
-            <a href="{{ c.get_absolute_url }}"
-               class="relative group text-lg tracking-widest uppercase transition-all duration-500
-                      {% if category.slug == c.slug %}active-witch-link{% else %}text-tekst-zgaszony hover:text-ksiega{% endif %}">
-                {{ c.name }}
-                <span class="absolute -bottom-2 left-0 w-full h-px bg-kolor-czary {% if category.slug == c.slug %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %} transition-transform"></span>
-            </a>
-        {% endfor %}
+    <div class="bg-mystic-ember text-candle-cream text-center py-2 text-sm tracking-widest uppercase font-bold shadow-md">
+        ✧ Najbliższe warsztaty z Tarota: 24 Kwietnia. Zapisy otwarte! ✧
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-        {% for product in products %}
-            <div class="group flex flex-col items-center">
-                <a href="{{ product.get_absolute_url }}" class="w-full aspect-[3/4] overflow-hidden rounded-2xl border border-kociolek bg-chata shadow-2xl relative">
-                    {% if product.image %}
-                        <img src="{{ product.image.url }}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000">
-                    {% endif %}
+    <div class="relative py-20 px-6 overflow-hidden">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-celestial-teal rounded-full mix-blend-screen filter blur-[100px] opacity-40"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-midnight-bloom rounded-full mix-blend-screen filter blur-[100px] opacity-20"></div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl font-serif mb-6 text-herbal-gold drop-shadow-lg">
+                {% if category %}{{ category.name }}{% else %}Księga Dzieł{% endif %}
+            </h1>
+            <p class="text-lg md:text-xl text-candle-cream/80 max-w-2xl mx-auto leading-relaxed">
+                {% if category and category.description %}
+                    {{ category.description }}
+                {% elif category %}
+                    Zanurz się w magicznym świecie kategorii {{ category.name|lower }}. Każdy przedmiot tutaj posiada własną duszę i intencję.
+                {% else %}
+                    Witaj w mojej artystycznej przestrzeni. Przeszukaj poniższe zbiory, znajdź coś dla siebie lub odkryj nowe pokłady wiedzy.
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 pb-32 pt-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+            {% for product in products %}
+
+                <a href="{{ product.get_absolute_url }}" class="group block relative flex flex-col bg-gradient-to-b from-celestial-teal/40 to-mystic-ember/20 border border-herbal-gold/30 rounded-t-[3rem] rounded-b-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_0_20px_rgba(210,178,133,0.3)] hover:border-herbal-gold transition-all duration-500 hover:-translate-y-2 backdrop-blur-sm cursor-pointer">
+
+                    <div class="w-full aspect-[4/5] relative overflow-hidden bg-deep-teal">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        {% endif %}
+
+                        {% if product.is_digital %}
+                            <span class="absolute top-4 right-4 bg-mystic-ember text-candle-cream text-[10px] px-4 py-1.5 rounded-full font-bold uppercase tracking-widest shadow-md border border-herbal-gold/50">
+                                Plik PDF
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <div class="p-6 text-center">
+                        <h2 class="font-serif text-2xl text-candle-cream group-hover:text-herbal-gold transition-colors duration-300 mb-3">{{ product.name }}</h2>
+                        <div class="w-12 h-px bg-mystic-ember mx-auto mb-3 group-hover:w-24 group-hover:bg-herbal-gold transition-all duration-500"></div>
+                        <p class="text-herbal-gold font-bold text-lg tracking-wider">{{ product.price }} ZŁ</p>
+                    </div>
                 </a>
-                <div class="mt-6 text-center">
-                    <h3 class="font-serif text-xl text-ksiega italic">{{ product.name }}</h3>
-                    <p class="text-kolor-czary mt-2 tracking-tighter">{{ product.price }} ZŁ</p>
+
+            {% empty %}
+                <div class="col-span-full py-20 text-center bg-mystic-ember/10 border border-herbal-gold/30 rounded-[3rem]">
+                    <div class="w-16 h-16 rounded-full border border-herbal-gold flex items-center justify-center mx-auto mb-6 text-herbal-gold bg-deep-teal">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    </div>
+                    <p class="font-serif text-3xl text-herbal-gold mb-4">Pusta Strona</p>
+                    <p class="text-candle-cream max-w-md mx-auto mb-8">W tej sekcji księgi nie zapisano jeszcze żadnych magicznych artefaktów.</p>
                 </div>
-            </div>
-        {% empty %}
-            <div class="col-span-full py-20 text-center">
-                <p class="font-serif text-2xl text-tekst-zgaszony italic">Ta sekcja księgi pozostaje jeszcze nieodkryta...</p>
-                <a href="/admin/shop/product/add/" class="inline-block mt-8 text-kolor-czary border-b border-kolor-czary pb-1 hover:text-ksiega transition">Dodaj pierwszy artefakt</a>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

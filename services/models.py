@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.db import models
 
 
@@ -21,6 +22,9 @@ class Service(models.Model):
     image = models.ImageField(upload_to='services/', blank=True, null=True, verbose_name="Zdjęcie poglądowe")
     is_active = models.BooleanField(default=True, verbose_name="Aktywna (wyświetlaj na stronie)")
 
+    def get_absolute_url(self):
+        # Ta funkcja mówi Django: "zbuduj link do widoku service_detail i przekaż mu mój slug"
+        return reverse('services:service_detail', args=[self.slug])
     class Meta:
         verbose_name = "Usługa"
         verbose_name_plural = "Usługi"

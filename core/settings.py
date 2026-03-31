@@ -73,8 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # DODAJ TĘ LINIJKĘ:
                 'cart.context_processors.cart',
+                'shop.context_processors.menu_categories',
             ],
         },
     },
@@ -212,7 +212,7 @@ JAZZMIN_SETTINGS = {
 
 # Kolory i motywy
 JAZZMIN_UI_TWEAKS = {
-    "theme": "darkly",  # Jasny, bardzo czysty i elegancki motyw
+    "theme": "auto",  # Jasny, bardzo czysty i elegancki motyw
     "dark_mode_theme": "darkly",
     "button_classes": {
         "primary": "btn-outline-primary",

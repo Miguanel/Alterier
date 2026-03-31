@@ -18,42 +18,43 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Lora', 'serif'], // Font bazowy
-                        serif: ['Playfair Display', 'serif'], // Font dla nagłówków (.font-serif)
+                    colors: {
+                        'candle-cream': '#F4DAC4',
+                        'herbal-gold': '#D2B285',
+                        'midnight-bloom': '#8C9F9F',
+                        'celestial-teal': '#405C5D',
+                        'mystic-ember': '#764836',
+                        'deep-teal': '#1A2A2B',
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="font-sans antialiased flex flex-col min-h-screen">
+<body class="bg-deep-teal font-sans antialiased flex flex-col min-h-screen">
 
-    <header class="py-4 px-6 border-b border-kociolek relative z-20">
+    <header class="bg-celestial-teal py-4 px-6 border-b border-herbal-gold/30 relative z-20 shadow-md">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
 
-            <div class="flex items-center space-x-2 w-1/3 text-tekst-zgaszony">
+            <div class="flex items-center space-x-2 w-1/3 text-candle-cream/80">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                <span class="text-sm opacity-70 hidden md:block">Przeszukaj księgi...</span>
+                <span class="text-sm hidden md:block">Przeszukaj księgi...</span>
             </div>
 
             <div class="w-1/3 text-center">
-                <a href="{% url 'pages:home' %}" class="text-3xl font-serif font-bold tracking-wide text-ksiega hover:text-kolor-czary transition-colors">
+                <a href="{% url 'pages:home' %}" class="text-3xl font-serif font-bold tracking-wide text-herbal-gold hover:text-candle-cream transition-colors drop-shadow-md">
                     TWOJE ATELIER
                 </a>
             </div>
 
-            <div class="flex justify-end items-center space-x-6 w-1/3 text-sm text-tekst-zgaszony">
-
-                <a href="#" class="cursor-pointer hover:text-ksiega transition-colors">
+            <div class="flex justify-end items-center space-x-6 w-1/3 text-candle-cream">
+                <a href="#" class="cursor-pointer hover:text-herbal-gold transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 </a>
-
-                <a href="{% url 'cart:cart_detail' %}" class="relative cursor-pointer hover:text-ksiega transition-colors block">
+                <a href="{% url 'cart:cart_detail' %}" class="relative cursor-pointer hover:text-herbal-gold transition-colors block">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-
                     {% if cart|length > 0 %}
-                        <span class="absolute -top-1 -right-2 bg-kolor-czary text-bg-mrok text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
+                        <span class="absolute -top-1 -right-2 bg-mystic-ember text-candle-cream text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold shadow-sm">
                             {{ cart|length }}
                         </span>
                     {% endif %}
@@ -62,54 +63,120 @@
         </div>
     </header>
 
-    <nav class="bg-chata/90 backdrop-blur-sm font-medium border-t border-kociolek relative z-10">
-        <div class="max-w-7xl mx-auto px-6 overflow-x-auto">
-            <ul class="flex justify-center space-x-6 md:space-x-10 py-4 text-sm md:text-base whitespace-nowrap text-ksiega tracking-wide">
-                <li><a href="{% url 'shop:product_list' %}" class="relative group pb-1 hover:text-kolor-czary-hover transition">
-                    Sklep i PDFy
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-kolor-czary scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                </a></li>
-                <li><a href="{% url 'services:service_list' %}" class="relative group pb-1 hover:text-kolor-czary-hover transition">
-                    Tarot & Warsztaty
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-kolor-czary scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                </a></li>
-                <li>
-                    <a href="{% url 'shop:product_list_by_category' 'naklejki' %}"
-                       class="transition-all duration-500 {% if 'kategoria/naklejki' in request.path %}active-witch-link text-ksiega{% else %}hover:opacity-75{% endif %}">
-                        Naklejki
-                    </a>
+    <nav class="bg-celestial-teal/80 backdrop-blur-md font-medium border-b border-herbal-gold/20 relative z-40">
+        <div class="max-w-7xl mx-auto px-6">
+            <ul class="flex justify-center space-x-6 md:space-x-10 py-4 text-sm md:text-base whitespace-nowrap text-candle-cream tracking-wide">
+
+                <li class="relative nav-dropdown flex items-center">
+                    <button class="dropdown-toggle flex items-center pb-1 hover:text-herbal-gold transition duration-300 font-bold uppercase focus:outline-none {% if '/shop/' in request.path and 'naklejki' not in request.path %}text-herbal-gold drop-shadow-[0_0_8px_rgba(210,178,133,0.5)]{% endif %}">
+                        Sklep i PDFy
+                        <svg class="w-4 h-4 ml-1 opacity-70 transform transition-transform duration-300 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <ul class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full mt-3 w-64 bg-deep-teal border border-herbal-gold/40 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] invisible opacity-0 translate-y-2 transition-all duration-300 z-50 overflow-hidden">
+                        <li><a href="{% url 'shop:product_list' %}" class="block px-6 py-4 text-sm font-bold border-b border-herbal-gold/20 hover:bg-herbal-gold/30 hover:text-candle-cream transition text-center">Cały asortyment</a></li>
+
+                        <li><a href="{% url 'shop:product_list_by_category' 'e-booki-pdf' %}" class="block px-6 py-3.5 text-sm hover:bg-herbal-gold/30 hover:text-candle-cream transition text-center">E-booki PDF</a></li>
+                        <li><a href="{% url 'shop:product_list_by_category' 'obrazy-olejne' %}" class="block px-6 py-3.5 text-sm hover:bg-herbal-gold/30 hover:text-candle-cream transition text-center">Obrazy olejne</a></li>
+                    </ul>
                 </li>
-                <li><a href="{% url 'pages:about' %}" class="relative group pb-1 hover:text-kolor-czary-hover transition">
-                    O mnie
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-kolor-czary scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                </a></li>
-                <li><a href="{% url 'pages:contact' %}" class="relative group pb-1 hover:text-kolor-czary-hover transition">
-                    Kontakt
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-kolor-czary scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                </a></li>
+
+                <li class="relative nav-dropdown flex items-center">
+                    <button class="dropdown-toggle flex items-center pb-1 hover:text-herbal-gold transition duration-300 font-bold uppercase focus:outline-none {% if '/services/' in request.path or '/uslugi/' in request.path %}text-herbal-gold drop-shadow-[0_0_8px_rgba(210,178,133,0.5)]{% endif %}">
+                        Tarot & Warsztaty
+                        <svg class="w-4 h-4 ml-1 opacity-70 transform transition-transform duration-300 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <ul class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full mt-3 w-64 bg-deep-teal border border-herbal-gold/40 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] invisible opacity-0 translate-y-2 transition-all duration-300 z-50 overflow-hidden">
+                        <li><a href="{% url 'services:service_list' %}" class="block px-6 py-4 text-sm font-bold border-b border-herbal-gold/20 hover:bg-herbal-gold/30 hover:text-candle-cream transition text-center">Wszystkie spotkania</a></li>
+
+                        <li><a href="{% url 'services:service_detail' 'indywidualny-odczyt' %}" class="block px-6 py-3.5 text-sm hover:bg-herbal-gold/30 hover:text-candle-cream transition text-center">Indywidualny odczyt</a></li>
+                        <li><a href="{% url 'services:service_detail' 'warsztaty-grupowe' %}" class="block px-6 py-3.5 text-sm hover:bg-herbal-gold/30 hover:text-candle-cream transition text-center">Warsztaty grupowe</a></li>
+                    </ul>
+                </li>
+
+                <li class="relative nav-dropdown flex items-center">
+                    <button class="dropdown-toggle flex items-center pb-1 hover:text-herbal-gold transition duration-300 font-bold uppercase focus:outline-none {% if 'naklejki' in request.path %}text-herbal-gold drop-shadow-[0_0_8px_rgba(210,178,133,0.5)]{% endif %}">
+                        Naklejki
+                        <svg class="w-4 h-4 ml-1 opacity-70 transform transition-transform duration-300 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <ul class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full mt-3 w-64 bg-deep-teal border border-herbal-gold/40 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] invisible opacity-0 translate-y-2 transition-all duration-300 z-50 overflow-hidden">
+                        <li><a href="{% url 'shop:product_list_by_category' 'naklejki' %}" class="block px-6 py-4 text-sm font-bold border-b border-herbal-gold/20 hover:bg-herbal-gold/30 hover:text-candle-cream transition text-center">Wszystkie naklejki</a></li>
+
+                        {% for cat in all_categories %}
+                            {% if cat.parent and cat.parent.slug == 'naklejki' %}
+                                <li><a href="{{ cat.get_absolute_url }}" class="block px-6 py-3.5 text-sm hover:bg-herbal-gold/30 hover:text-candle-cream transition text-center">{{ cat.name }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="flex items-center"><a href="{% url 'pages:about' %}" class="pb-1 hover:text-herbal-gold transition duration-300 font-bold uppercase {% if request.path == '/o-mnie/' %}text-herbal-gold drop-shadow-[0_0_8px_rgba(210,178,133,0.5)]{% endif %}">O mnie</a></li>
+                <li class="flex items-center"><a href="{% url 'pages:contact' %}" class="pb-1 hover:text-herbal-gold transition duration-300 font-bold uppercase {% if request.path == '/kontakt/' %}text-herbal-gold drop-shadow-[0_0_8px_rgba(210,178,133,0.5)]{% endif %}">Kontakt</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="bg-gradient-to-r from-bg-chata via-kolor-trucizna/50 to-bg-chata text-tekst-zgaszony text-center py-2.5 text-xs tracking-widest uppercase border-b border-kociolek">
-        Witaj w mojej artystycznej przestrzeni! Sprawdź nowe warsztaty.
+    <div class="bg-gradient-to-r from-mystic-ember via-herbal-gold to-mystic-ember text-deep-teal font-bold text-center py-2.5 text-xs tracking-widest uppercase shadow-md">
+        Tu by szło też coś napisać, jak ni to usuwom.
     </div>
 
-    <main class="flex-grow w-full pb-20">
-        {% block content %}
-        {% endblock %}
+    <main class="flex-grow w-full pb-20 text-candle-cream">
+        {% block content %}{% endblock %}
     </main>
 
-    <footer class="py-16 text-center text-ksiega border-t border-kociolek bg-chata relative z-10">
+    <footer class="py-16 text-center text-candle-cream border-t border-herbal-gold/30 bg-mystic-ember relative z-10">
         <div class="max-w-xl mx-auto px-6">
-            <h4 class="text-sm font-semibold mb-6 tracking-wide">Zapisz się do newslettera:</h4>
+            <h4 class="text-lg font-serif mb-6 tracking-wide text-herbal-gold">Zapisz się do newslettera:</h4>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <input type="email" placeholder="Adres e-mail" class="bg-transparent border-b border-tekst-zgaszony/50 px-3 py-2 w-full sm:w-64 focus:outline-none focus:border-kolor-czary placeholder-tekst-zgaszony/50 transition-colors">
-                <button class="bg-kolor-czary hover:bg-kolor-czary-hover text-bg-mrok px-8 py-2.5 rounded-full font-bold transition shadow-sm text-sm">Zapisz się</button>
+                <input type="email" placeholder="Adres e-mail" class="bg-deep-teal/50 border border-herbal-gold/50 rounded-full px-6 py-3 w-full sm:w-64 focus:outline-none focus:border-herbal-gold text-candle-cream placeholder-candle-cream/50 transition-colors">
+                <button class="bg-herbal-gold hover:bg-candle-cream text-deep-teal px-8 py-3 rounded-full font-bold transition shadow-lg text-sm uppercase tracking-wider">Zapisz się</button>
             </div>
-            <p class="mt-12 text-sm text-tekst-zgaszony">&copy; 2026 Twoje Atelier. Wszystkie prawa zastrzeżone.</p>
+            <p class="mt-12 text-sm text-candle-cream/70">&copy; 2026 Twoje Atelier. Wszystkie prawa zastrzeżone.</p>
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const menu = this.nextElementSibling;
+                    const isOpen = !menu.classList.contains('invisible');
+                    const arrow = this.querySelector('.arrow-icon');
+
+                    // 1. Zamykamy wszystkie menu i resetujemy strzałki
+                    document.querySelectorAll('.dropdown-menu').forEach(m => {
+                        m.classList.add('invisible', 'opacity-0', 'translate-y-2');
+                        m.classList.remove('visible', 'opacity-100', 'translate-y-0');
+                    });
+                    document.querySelectorAll('.arrow-icon').forEach(a => {
+                        a.classList.remove('rotate-180');
+                    });
+
+                    // 2. Jeśli kliknięte menu było zamknięte - otwieramy je i obracamy jego strzałkę
+                    if (!isOpen) {
+                        menu.classList.remove('invisible', 'opacity-0', 'translate-y-2');
+                        menu.classList.add('visible', 'opacity-100', 'translate-y-0');
+                        if (arrow) arrow.classList.add('rotate-180');
+                    }
+                });
+            });
+
+            // Zamykanie po kliknięciu poza obszarem menu
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.nav-dropdown')) {
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        menu.classList.add('invisible', 'opacity-0', 'translate-y-2');
+                        menu.classList.remove('visible', 'opacity-100', 'translate-y-0');
+                    });
+                    document.querySelectorAll('.arrow-icon').forEach(a => {
+                        a.classList.remove('rotate-180');
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

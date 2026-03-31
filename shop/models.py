@@ -2,8 +2,12 @@ from django.db import models
 from django.urls import reverse
 
 class Category(models.Model):
+    # Pole pozwalające przypiąć kategorię do innej kategorii (tworzenie podzbiorów)
+    parent = models.ForeignKey('self', related_name='children', on_delete=models.CASCADE, blank=True, null=True, verbose_name="Kategoria nadrzędna")
     name = models.CharField(max_length=200, verbose_name="Nazwa kategorii")
     slug = models.SlugField(max_length=200, unique=True, verbose_name="URL (Slug)")
+    # Pole na unikalny opis podkategorii
+    description = models.TextField(blank=True, verbose_name="Opis widoczny na stronie")
 
     class Meta:
         ordering = ['name']
@@ -11,6 +15,9 @@ class Category(models.Model):
         verbose_name_plural = "Kategorie"
 
     def __str__(self):
+        # W panelu admina będzie widać ładną ścieżkę np. "Naklejki -> Zwierzęta"
+        if self.parent:
+            return f"{self.parent.name} -> {self.name}"
         return self.name
 
     def get_absolute_url(self):
